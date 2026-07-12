@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h3>Today Fruits</h3>
+    <ul id="fruit-list"></ul>
+    <hr/>
+    <h3>Today Vegetables</h3>
+    <ul id="veg-list"></ul>
+
+    <script>
+      // 1. Define the arrays for fruits and vegetables
+      const fruits = ["Apple", "Banana", "Orange", "Mango", "Strawberry"];
+      const vegetables = ["Carrot", "Broccoli", "Spinach", "Tomato", "Cucumber"];
+
+      // 2. Get references to the HTML <ul> elements
+      const fruitList = document.getElementById("fruit-list");
+      const vegList = document.getElementById("veg-list");
+
+      // 3. Loop through the fruits array and append to the fruit list
+      fruits.forEach(function(fruit) {
+        let li = document.createElement("li"); // Create a new <li> element
+        li.textContent = fruit;                // Set its text to the current fruit
+        fruitList.appendChild(li);             // Append it to the <ul>
+      });
+
+      // 4. Loop through the vegetables array and append to the vegetable list
+      vegetables.forEach(function(veg) {
+        let li = document.createElement("li"); // Create a new <li> element
+        li.textContent = veg;                  // Set its text to the current vegetable
+        vegList.appendChild(li);               // Append it to the <ul>
+      });
+    </script>
+  </body>
+</html>

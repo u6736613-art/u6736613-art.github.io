@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Array Filter Assignment</title>
+  </head>
+  <body>
+    <h3>Open your browser console to see the filtered list.</h3>
+
+    <script>
+      // 1. Copy the provided array of names
+      const people = [
+        "Alice Anderson",
+        "Aaron Adams",
+        "Bella Brown",
+        "Brian Black",
+        "Cathy Carter",
+        "Charles Cooper",
+        "Diana Davis",
+        "Daniel Drake",
+        "Ella Evans",
+        "Ethan Edwards",
+        "Fiona Fisher",
+        "Frank Foster",
+        "Grace Green",
+        "Gavin Gray",
+        "Hannah Harris",
+        "Henry Hill",
+        "Isabella Ingram",
+        "Ian Irving",
+        "Jack Johnson",
+        "Julia James"
+      ];
+
+      // 2. Define the chosen starting character
+      const filterLetter = "B";
+
+      // 3. Use the filter() method to create the new array
+      const result = people.filter((name) => {
+        // Check if the first character matches our chosen letter
+        return name.charAt(0) === filterLetter;
+      });
+
+      // 4. Display the filtered list in the console
+      console.log(`Names starting with "${filterLetter}":`, result);
+    </script>
+  </body>
+</html>

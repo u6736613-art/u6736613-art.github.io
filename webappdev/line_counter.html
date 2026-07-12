@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <ul id="list1"></ul>
+    
+    <script>
+      // Loop from 1 to 20
+      for (let i = 1; i <= 20; i++) {
+        // Check if the current number is NOT 5, 10, or 15
+        if (i !== 5 && i !== 10 && i !== 15) {
+          // Append the list item using the hint provided
+          document.getElementById("list1").innerHTML += `<li>Line ${i}</li>`;
+        }
+      }
+    </script>
+  </body>
+</html>

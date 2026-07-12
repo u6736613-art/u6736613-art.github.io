@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Display</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 40px;
+      color: #333;
+    }
+    .container {
+      max-width: 500px;
+    }
+    h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    select {
+      width: 250px;
+      padding: 6px 10px;
+      font-size: 16px;
+      border: 1px solid #767676;
+      border-radius: 4px;
+      background-color: #fff;
+      margin-bottom: 15px;
+      outline: none;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+    .detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    .detail-table td {
+      padding: 6px 0;
+      vertical-align: top;
+    }
+    .label {
+      font-weight: bold;
+      width: 140px;
+    }
+    .value {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Item Display</h2>
+    
+    <select id="item-selector">
+      </select>
+    
+    <hr>
+    
+    <table class="detail-table">
+      <tr>
+        <td class="label">ID</td>
+        <td class="value" id="detail-id"></td>
+      </tr>
+      <tr>
+        <td class="label">Name</td>
+        <td class="value" id="detail-name"></td>
+      </tr>
+      <tr>
+        <td class="label">Category</td>
+        <td class="value" id="detail-category"></td>
+      </tr>
+      <tr>
+        <td class="label">Inventory Amt.</td>
+        <td class="value" id="detail-inventory"></td>
+      </tr>
+      <tr>
+        <td class="label">List price</td>
+        <td class="value" id="detail-price"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    // Data provided from item-list.js
+    const items = [
+      { id: 1, name: "Mouse", category: "IT", inventory: 200, price: 240 },
+      { id: 2, name: "Keyboard", category: "IT", inventory: 150, price: 490 },
+      { id: 3, name: "Monitor", category: "IT", inventory: 75, price: 3200 },
+      { id: 4, name: "USB Cable", category: "IT", inventory: 350, price: 120 },
+      { id: 5, name: "Notebook", category: "Stationery", inventory: 500, price: 55 },
+      { id: 6, name: "Pen", category: "Stationery", inventory: 900, price: 15 },
+      { id: 7, name: "Desk Lamp", category: "Home", inventory: 120, price: 750 },
+      { id: 8, name: "Water Bottle", category: "Lifestyle", inventory: 260, price: 210 },
+      { id: 9, name: "Backpack", category: "Lifestyle", inventory: 95, price: 980 },
+      { id: 10, name: "Phone Stand", category: "IT", inventory: 180, price: 160 },
+      { id: 11, name: "Headphones", category: "IT", inventory: 130, price: 1450 }
+    ];
+
+    // DOM Elements
+    const selector = document.getElementById('item-selector');
+    const detailId = document.getElementById('detail-id');
+    const detailName = document.getElementById('detail-name');
+    const detailCategory = document.getElementById('detail-category');
+    const detailInventory = document.getElementById('detail-inventory');
+    const detailPrice = document.getElementById('detail-price');
+
+    // 1. Initialize selector with an empty/default option
+    function initSelector() {
+      const defaultOption = document.createElement('option');
+      defaultOption.value = "";
+      defaultOption.textContent = ""; // Blank display as required
+      selector.appendChild(defaultOption);
+
+      // Populate items dynamically
+      items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = item.name;
+        selector.appendChild(option);
+      });
+    }
+
+    // 2. Clear all item values from display text fields
+    function clearDetails() {
+      detailId.textContent = "";
+      detailName.textContent = "";
+      detailCategory.textContent = "";
+      detailInventory.textContent = "";
+      detailPrice.textContent = "";
+    }
+
+    // 3. Update UI text nodes based on selected ID
+    function updateDetails(selectedId) {
+      // Find matching item using ID integer conversion
+      const item = items.find(i => i.id === parseInt(selectedId));
+      
+      if (item) {
+        detailId.textContent = item.id;
+        detailName.textContent = item.name;
+        detailCategory.textContent = item.category;
+        detailInventory.textContent = item.inventory;
+        detailPrice.textContent = item.price;
+      } else {
+        clearDetails();
+      }
+    }
+
+    // 4. Event Listener for Selection Changes
+    selector.addEventListener('change', (event) => {
+      const selectedValue = event.target.value;
+      if (selectedValue === "") {
+        clearDetails();
+      } else {
+        updateDetails(selectedValue);
+      }
+    });
+
+    // Run initializer on script execution
+    initSelector();
+  </script>
+</body>
+</html>
