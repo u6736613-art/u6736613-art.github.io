@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Web Form</title>
+    <link rel="stylesheet" href="style1.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>Interactive Web Form</h2>
+    <form id="interactiveForm">
+        <div>
+            <label>Username</label><br>
+            <input type="text" id="username" class="validate"><br>
+            <span class="error" id="error-username"></span>
+        </div>
+        <div>
+            <label>Email</label><br>
+            <input type="text" id="email" class="validate"><br>
+            <span class="error" id="error-email"></span>
+        </div>
+        <div>
+            <label>Password</label><br>
+            <input type="password" id="password" class="validate"><br>
+            <span class="error" id="error-password"></span>
+        </div>
+        <div>
+            <label>Confirm Password</label><br>
+            <input type="password" id="confirmPassword" class="validate"><br>
+            <span class="error" id="error-confirmPassword"></span>
+        </div>
+        <div>
+            <label>Interesting Topics</label> 
+            <span class="error" id="error-topics"></span><br>
+            <input type="checkbox" name="topic" value="HTML"> HTML<br>
+            <input type="checkbox" name="topic" value="CSS"> CSS<br>
+            <input type="checkbox" name="topic" value="JavaScript"> JavaScript
+        </div>
+        <div>
+            <label>Gender</label> 
+            <span class="error" id="error-gender"></span><br>
+            <select id="gender">
+                <option value="--">--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <br>
+        <button type="submit" id="submitBtn">Submit</button>
+    </form>
+
+    <script src="script1.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+$(document).ready(function() {
+    $('#interactiveForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Reset previous errors
+        $('.error').text('');
+        $('.validate').removeClass('input-error');
+        let isValid = true;
+
+        // 1. Validate empty fields (Username, Email, Password, Confirm Password)
+        $('.validate').each(function() {
+            if ($(this).val() === "") {
+                $(this).addClass('input-error');
+                $('#error-' + $(this).attr('id')).text('this field must not be empty');
+                isValid = false;
+            }
+        });
+
+        // 2. Validate at least one topic checked
+        if ($('input[name="topic"]:checked').length === 0) {
+            $('#error-topics').text('At least one topic must be selected');
+            isValid = false;
+        }
+
+        // 3. Validate Gender selection
+        if ($('#gender').val() === "--") {
+            $('#error-gender').text('please choose your gender');
+            isValid = false;
+        }
+
+        // 4. Validate Confirm Password match
+        if ($('#password').val() !== "" && $('#password').val() !== $('#confirmPassword').val()) {
+            $('#confirmPassword').addClass('input-error');
+            $('#error-confirmPassword').text('confirmed password mismatched the password');
+            isValid = false;
+        }
+
+        if (isValid) {
+            alert("Form submitted successfully!");
+        }
+    });
+});
