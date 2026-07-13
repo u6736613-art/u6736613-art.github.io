@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <title>JQuery Assignment 1</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="data.js"></script>
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; }
+      table { border-collapse: collapse; border: 1px solid black; width: 60%; }
+      table tr th, table tr td { border: 1px solid black; padding: 5px 4px; }
+      .editable { cursor: pointer; background-color: #f9f9f9; }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Midterm</th><th>Final</th><th>Total</th><th>Grade</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <script>
+      $(document).ready(function () {
+        function calculateGrade(total) {
+          if (total >= 80) return 'A';
+          if (total >= 70) return 'B';
+          if (total >= 60) return 'C';
+          if (total >= 50) return 'D';
+          return 'F';
+        }
+
+        function renderTable() {
+          const $tbody = $('#table-body');
+          $tbody.empty();
+          students.forEach((student, index) => {
+            const total = student.midterm + student.final;
+            $tbody.append(`
+              <tr data-index="${index}">
+                <td>${student.id}</td><td>${student.name}</td>
+                <td class="editable" data-field="midterm">${student.midterm}</td>
+                <td class="editable" data-field="final">${student.final}</td>
+                <td class="total">${total}</td>
+                <td class="grade">${calculateGrade(total)}</td>
+              </tr>`);
+          });
+        }
+
+        $(document).on('click', '.editable', function () {
+          if ($(this).find('input').length > 0) return;
+          const originalVal = $(this).text();
+          $(this).html(`<input type="number" value="${originalVal}" style="width: 50px;">`);
+          const $input = $(this).find('input');
+          $input.focus();
+
+          $input.on('keydown', function (e) {
+            if (e.key === 'Enter') {
+              const val = parseInt($(this).val());
+              if (val >= 0 && val <= 50) {
+                const index = $(this).closest('tr').data('index');
+                const field = $(this).closest('td').data('field');
+                students[index][field] = val;
+                renderTable();
+              } else { alert("Enter 0-50"); }
+            } else if (e.key === 'Escape') { renderTable(); }
+          });
+        });
+
+        renderTable();
+      });
+    </script>
+  </body>
+</html>
