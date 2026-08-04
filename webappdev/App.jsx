@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { categories, products as initialProducts } from './data/products';
+import { categories, products as initialProducts } from './product';
 import './App.css';
 
 function App() {
