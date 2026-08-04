@@ -10,12 +10,10 @@ function App() {
   const [purchaseList, setPurchaseList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Filter products based on category selection
   const filteredProducts = selectedCategory === "All"
     ? products
     : products.filter(p => p.categoryID === Number(selectedCategory));
 
-  // Handle Category Change
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
     setSelectedProduct("");
@@ -23,17 +21,14 @@ function App() {
     setErrorMessage("");
   };
 
-  // Handle Product Change
   const handleProductChange = (e) => {
     setSelectedProduct(e.target.value);
     setAmount(0);
     setErrorMessage("");
   };
 
-  // Find current product object
   const currentProduct = products.find(p => p.productID === Number(selectedProduct));
 
-  // Add Item Handler with validation & inventory deduction
   const handleAddItem = () => {
     if (!currentProduct) return;
     const qty = Number(amount);
@@ -50,7 +45,6 @@ function App() {
 
     setErrorMessage("");
 
-    // Update or Add to purchase list
     const existingIndex = purchaseList.findIndex(item => item.productID === currentProduct.productID);
     
     if (existingIndex > -1) {
@@ -67,19 +61,16 @@ function App() {
       }]);
     }
 
-    // Deduct inventory amount
     setProducts(products.map(p => 
       p.productID === currentProduct.productID 
         ? { ...p, inventoryAmount: p.inventoryAmount - qty } 
         : p
     ));
 
-    // Reset amount input
     setAmount(0);
     setSelectedProduct("");
   };
 
-  // Calculate Grand Total
   const grandTotal = purchaseList.reduce((acc, item) => {
     const discountedPrice = item.sellingPrice * (1 - item.discountPercentage / 100);
     return acc + (discountedPrice * item.amount);
@@ -89,7 +80,6 @@ function App() {
     <div className="container" style={{ padding: '20px', maxWidth: '900px', margin: 'auto', fontFamily: 'Arial, sans-serif' }}>
       <div className="card" style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '20px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         
-        {/* Category Selection */}
         <div style={{ marginBottom: '15px' }}>
           <label style={{ marginRight: '10px' }}>Select Category: </label>
           <select value={selectedCategory} onChange={handleCategoryChange} style={{ padding: '5px', width: '250px' }}>
@@ -100,7 +90,6 @@ function App() {
           </select>
         </div>
 
-        {/* Product Selection & Amount */}
         <div style={{ marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
           <div>
             <label style={{ marginRight: '10px' }}>Select Product: </label>
@@ -148,7 +137,6 @@ function App() {
 
         <hr style={{ margin: '20px 0', border: '0', borderTop: '1px solid #eee' }} />
 
-        {/* Purchase Table */}
         <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '15px', textAlign: 'left' }}>
           <thead>
             <tr style={{ borderBottom: '2px solid #ddd' }}>
@@ -187,7 +175,6 @@ function App() {
           </tbody>
         </table>
 
-        {/* Grand Total */}
         <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
           Total: {Math.round(grandTotal)}
         </div>

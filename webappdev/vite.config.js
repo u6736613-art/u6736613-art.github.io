@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/midterm-pos-app',
+  base: '/webappdev/',
   build: {
     rollupOptions: {
       input: {
